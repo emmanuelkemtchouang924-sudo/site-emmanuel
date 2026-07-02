@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Emmanuel Kemtchouang — Mécanicien d'engins lourds | CAT · Komatsu · Volvo · Liebherr</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --steel:#1B1C1A;
+    --steel-2:#25271F;
+    --paper:#F2EFE7;
+    --amber:#E8A93B;
+    --rust:#C1502E;
+    --graphite:#8A8D82;
+    --hydro:#2F5D62;
+    --ok:#5C8A5C;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--paper);
+    color:var(--steel);
+    font-family:'IBM Plex Sans', sans-serif;
+    line-height:1.5;
+  }
+  h1,h2,h3,.display{
+    font-family:'Oswald', sans-serif;
+    text-transform:uppercase;
+    letter-spacing:0.02em;
+  }
+  .mono{font-family:'IBM Plex Mono', monospace;}
+  a{color:inherit; text-decoration:none;}
+  img,svg{display:block; max-width:100%;}
+  .wrap{max-width:1120px; margin:0 auto; padding:0 24px;}
+  :focus-visible{outline:3px solid var(--amber); outline-offset:2px;}
+
+  header{
+    position:sticky; top:0; z-index:50;
+    background:var(--steel); color:var(--paper);
+    border-bottom:3px solid var(--amber);
+  }
+  .navbar{display:flex; align-items:center; justify-content:space-between; padding:14px 24px;}
+  .brand{display:flex; align-items:center; gap:10px; font-family:'Oswald'; font-weight:700; font-size:1.05rem; letter-spacing:0.03em;}
+  .brand .dot{width:10px; height:10px; background:var(--amber); border-radius:50%; box-shadow:0 0 0 3px rgba(232,169,59,0.25);}
+  nav ul{list-style:none; display:flex; gap:28px;}
+  nav a{font-size:0.82rem; font-weight:600; letter-spacing:0.08em; text-transform:uppercase; opacity:0.85; transition:opacity .2s;}
+  nav a:hover{opacity:1; color:var(--amber);}
+  .nav-cta{
+    background:var(--amber); color:var(--steel); padding:9px 16px;
+    font-family:'IBM Plex Mono'; font-weight:600; font-size:0.78rem;
+    border-radius:2px; letter-spacing:0.03em; white-space:nowrap;
+  }
+  .menu-toggle{display:none; background:none; border:none; color:var(--paper); font-size:1.6rem; cursor:pointer;}
+
+  .hero{
+    background:
+      linear-gradient(180deg, rgba(27,28,26,0.94), rgba(27,28,26,0.97)),
+      repeating-linear-gradient(135deg, #232420 0px, #232420 2px, #1B1C1A 2px, #1B1C1A 26px);
+    color:var(--paper);
+    padding:76px 0 64px;
+  }
+  .hero-grid{display:grid; grid-template-columns:1.15fr 0.85fr; gap:48px; align-items:center;}
+  .eyebrow{
+    font-family:'IBM Plex Mono'; font-size:0.78rem; color:var(--amber);
+    letter-spacing:0.12em; display:flex; align-items:center; gap:10px; margin-bottom:18px;
+  }
+  .eyebrow::before{content:''; width:28px; height:2px; background:var(--amber); display:inline-block;}
+  .hero h1{font-size:clamp(2.3rem, 5vw, 3.6rem); line-height:1.05; font-weight:700; margin-bottom:18px;}
+  .hero h1 span{color:var(--amber);}
+  .hero p.lede{font-size:1.05rem; color:#D8D4C6; max-width:46ch; margin-bottom:30px;}
+  .hero-actions{display:flex; gap:14px; flex-wrap:wrap;}
+  .btn{
+    display:inline-flex; align-items:center; gap:8px;
+    padding:14px 22px; font-family:'IBM Plex Mono'; font-weight:600; font-size:0.85rem;
+    border-radius:2px; letter-spacing:0.02em; transition:transform .15s ease, background .15s ease;
+  }
+  .btn-primary{background:var(--amber); color:var(--steel);}
+  .btn-primary:hover{transform:translateY(-2px); background:#f0b750;}
+  .btn-ghost{border:1.5px solid #565850; color:var(--paper);}
+  .btn-ghost:hover{border-color:var(--amber); color:var(--amber);}
+
+  .gauge-panel{
+    background:var(--steel-2); border:1px solid #3a3c34; border-radius:6px;
+    padding:22px; position:relative;
+  }
+  .gauge-panel .mono.label{font-size:0.7rem; color:var(--graphite); letter-spacing:0.12em; margin-bottom:14px; display:flex; justify-content:space-between;}
+  .gauge-wrap{display:flex; justify-content:center; padding:6px 0 4px;}
+  .gauge svg{width:220px; height:auto;}
+  #needle{transform-origin:110px 118px; transform:rotate(-90deg); transition:transform 1.8s cubic-bezier(.2,.9,.25,1);}
+  .gauge-panel.armed #needle{transform:rotate(58deg);}
+  .readout{
+    margin-top:14px; font-family:'IBM Plex Mono'; font-size:0.78rem; color:var(--ok);
+    border-top:1px dashed #3a3c34; padding-top:12px; min-height:20px;
+  }
+  .readout .cursor{display:inline-block; width:7px; height:12px; background:var(--ok); vertical-align:middle; margin-left:2px; animation:blink 1s step-end infinite;}
+  @keyframes blink{50%{opacity:0;}}
+
+  .brands{background:var(--steel); border-top:1px solid #3a3c34; border-bottom:1px solid #3a3c34; padding:20px 0;}
+  .brands-row{display:flex; justify-content:center; gap:40px; flex-wrap:wrap;}
+  .brands-row span{
+    font-family:'IBM Plex Mono'; font-weight:600; font-size:0.82rem; letter-spacing:0.14em;
+    color:#B9BBB0;
+  }
+
+  section{padding:80px 0;}
+  .section-head{margin-bottom:40px; max-width:60ch;}
+  .section-head .eyebrow{color:var(--rust);}
+  .section-head .eyebrow::before{background:var(--rust);}
+  .section-head h2{font-size:clamp(1.6rem, 3.4vw, 2.3rem);}
+
+  .services-grid{display:grid; grid-template-columns:repeat(auto-fit, minmax(240px, 1fr)); gap:18px;}
+  .plate{
+    background:var(--steel); color:var(--paper); border-radius:4px; padding:26px 22px;
+    border-top:4px solid var(--amber); position:relative;
+  }
+  .plate:nth-child(2){border-top-color:var(--rust);}
+  .plate:nth-child(3){border-top-color:var(--hydro);}
+  .plate:nth-child(4){border-top-color:var(--graphite);}
+  .plate .code{font-family:'IBM Plex Mono'; font-size:0.72rem; color:var(--graphite); letter-spacing:0.1em; margin-bottom:10px;}
+  .plate h3{font-size:1.15rem; margin-bottom:10px;}
+  .plate p{font-size:0.9rem; color:#C9C6B9;}
+
+  .why{display:grid; grid-template-columns:1fr 1fr; gap:48px; align-items:start;}
+  .checklist{list-style:none;}
+  .checklist li{
+    display:flex; gap:14px; padding:16px 0; border-bottom:1px solid #DAD5C6;
+  }
+  .checklist li:last-child{border-bottom:none;}
+  .check{
+    width:22px; height:22px; flex:none; border-radius:3px; background:var(--ok);
+    display:flex; align-items:center; justify-content:center; color:#fff; font-size:0.8rem; font-weight:700; margin-top:2px;
+  }
+  .checklist strong{display:block; margin-bottom:3px;}
+  .checklist span.small{font-size:0.88rem; color:#565850;}
+
+  .why-visual{
+    background:var(--steel); border-radius:6px; padding:26px; color:var(--paper);
+  }
+  .why-visual .mono.label{font-size:0.7rem; color:var(--graphite); letter-spacing:0.1em; margin-bottom:16px;}
+  .stat-row{display:flex; justify-content:space-between; padding:12px 0; border-bottom:1px dashed #3a3c34; font-family:'IBM Plex Mono'; font-size:0.85rem;}
+  .stat-row:last-child{border-bottom:none;}
+  .stat-row b{color:var(--amber); font-size:1rem;}
+
+  .zone{background:var(--steel-2); color:var(--paper);}
+  .zone .section-head .eyebrow{color:var(--hydro);}
+  .zone .section-head .eyebrow::before{background:var(--hydro);}
+  .zone-grid{display:grid; grid-template-columns:1fr 1fr; gap:36px;}
+  .zone p{color:#C9C6B9; max-width:52ch; margin-bottom:16px;}
+  .tag-row{display:flex; flex-wrap:wrap; gap:10px; margin-top:18px;}
+  .tag{
+    font-family:'IBM Plex Mono'; font-size:0.75rem; padding:7px 12px; border:1px solid #3a3c34; border-radius:20px; color:#D8D4C6;
+  }
+
+  .contact{
+    background:linear-gradient(135deg, var(--rust), #9c3d22);
+    color:#fff; text-align:center; border-radius:8px; padding:52px 28px; margin:0 auto;
+  }
+  .contact h2{font-size:clamp(1.7rem,4vw,2.4rem); margin-bottom:12px;}
+  .contact p{color:#F5DCCF; max-width:50ch; margin:0 auto 28px;}
+  .contact .btn-primary{background:var(--paper); color:var(--steel);}
+  .contact .contact-note{margin-top:18px; font-family:'IBM Plex Mono'; font-size:0.78rem; color:#F5DCCF;}
+
+  footer{padding:34px 0; text-align:center; font-family:'IBM Plex Mono'; font-size:0.78rem; color:#7A7D72;}
+
+  @media (max-width: 860px){
+    nav ul, .nav-cta{display:none;}
+    .menu-toggle{display:block;}
+    .hero-grid{grid-template-columns:1fr;}
+    .why{grid-template-columns:1fr;}
+    .zone-grid{grid-template-columns:1fr;}
+  }
+  @media (prefers-reduced-motion: reduce){
+    html{scroll-behavior:auto;}
+    #needle{transition:none;}
+    .readout .cursor{animation:none;}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="navbar wrap">
+    <div class="brand"><span class="dot"></span> EMMANUEL K. — ENGINS LOURDS</div>
+    <nav><ul>
+      <li><a href="#services">Services</a></li>
+      <li><a href="#pourquoi">Pourquoi moi</a></li>
+      <li><a href="#zone">Zone</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul></nav>
+    <a href="#contact" class="nav-cta">Demander un devis</a>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="wrap hero-grid">
+    <div>
+      <div class="eyebrow">Diagnostic · Hydraulique · Moteur diesel</div>
+      <h1>Vos engins tombent en panne. <span>Moi, je les remets au travail.</span></h1>
+      <p class="lede">Mécanicien spécialisé en engins de chantier — moteurs diesel, systèmes hydrauliques et diagnostic électronique. Intervention sur CAT, Komatsu, Liebherr et Volvo, pour limiter chaque heure d'arrêt sur votre chantier.</p>
+      <div class="hero-actions">
+        <a href="#contact" class="btn btn-primary">Contacter sur WhatsApp →</a>
+        <a href="#services" class="btn btn-ghost">Voir les prestations</a>
+      </div>
+    </div>
+
+    <div class="gauge-panel" id="gaugePanel">
+      <div class="mono label"><span>PANNEAU DIAGNOSTIC</span><span>LIVE</span></div>
+      <div class="gauge-wrap">
+        <svg viewBox="0 0 220 140" class="gauge">
+          <path d="M20,118 A90,90 0 0,1 200,118" fill="none" stroke="#3a3c34" stroke-width="10"/>
+          <path d="M20,118 A90,90 0 0,1 110,28" fill="none" stroke="#C1502E" stroke-width="10"/>
+          <path d="M110,28 A90,90 0 0,1 160,45" fill="none" stroke="#E8A93B" stroke-width="10"/>
+          <path d="M160,45 A90,90 0 0,1 200,118" fill="none" stroke="#5C8A5C" stroke-width="10"/>
+          <line id="needle" x1="110" y1="118" x2="110" y2="42" stroke="#F2EFE7" stroke-width="3" stroke-linecap="round"/>
+          <circle cx="110" cy="118" r="7" fill="#F2EFE7"/>
+        </svg>
+      </div>
+      <div class="readout mono" id="readout">INITIALISATION<span class="cursor"></span></div>
+    </div>
+  </div>
+</section>
+
+<div class="brands">
+  <div class="wrap brands-row">
+    <span>CATERPILLAR</span><span>KOMATSU</span><span>LIEBHERR</span><span>VOLVO CE</span>
+  </div>
+</div>
+
+<section id="services">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow">Prestations</div>
+      <h2>Une intervention, quatre domaines couverts</h2>
+    </div>
+    <div class="services-grid">
+      <div class="plate">
+        <div class="code">FICHE 01 — MOTEUR</div>
+        <h3>Moteurs diesel</h3>
+        <p>Diagnostic, réglage, réparation et remise en état des blocs diesel toutes puissances.</p>
+      </div>
+      <div class="plate">
+        <div class="code">FICHE 02 — HYDRAULIQUE</div>
+        <h3>Systèmes hydrauliques</h3>
+        <p>Vérins, pompes, distributeurs et circuits — détection de fuite et perte de pression.</p>
+      </div>
+      <div class="plate">
+        <div class="code">FICHE 03 — ÉLECTRONIQUE</div>
+        <h3>Diagnostic électronique</h3>
+        <p>Lecture de codes défaut, capteurs et calculateurs sur engins récents.</p>
+      </div>
+      <div class="plate">
+        <div class="code">FICHE 04 — ENTRETIEN</div>
+        <h3>Entretien préventif</h3>
+        <p>Plan de maintenance régulier pour réduire les pannes et les arrêts de chantier.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="pourquoi" style="background:#EAE6D8;">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow">Pourquoi moi</div>
+      <h2>Ce que vous gagnez à travailler avec moi</h2>
+    </div>
+    <div class="why">
+      <ul class="checklist">
+        <li><span class="check">✓</span><div><strong>Diagnostic précis avant devis</strong><span class="small">Pas de pièce changée au hasard — je localise la panne avant d'intervenir.</span></div></li>
+        <li><span class="check">✓</span><div><strong>Multi-marques</strong><span class="small">CAT, Komatsu, Liebherr, Volvo — une seule personne à contacter pour tout le parc.</span></div></li>
+        <li><span class="check">✓</span><div><strong>Disponible sur site</strong><span class="small">Déplacement possible sur chantier pour limiter le temps d'immobilisation.</span></div></li>
+        <li><span class="check">✓</span><div><strong>Suivi transparent</strong><span class="small">Compte-rendu clair de chaque intervention et des pièces utilisées.</span></div></li>
+      </ul>
+      <div class="why-visual">
+        <div class="mono label">RÉCAPITULATIF EXPERTISE</div>
+        <div class="stat-row"><span>Domaines maîtrisés</span><b>4</b></div>
+        <div class="stat-row"><span>Marques prises en charge</span><b>CAT · KOM · LIE · VOL</b></div>
+        <div class="stat-row"><span>Type d'intervention</span><b>Chantier &amp; atelier</b></div>
+        <div class="stat-row"><span>Zone</span><b>Côte d'Ivoire</b></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="zone" class="zone">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow">Zone d'intervention</div>
+      <h2>Basé en Côte d'Ivoire, mobile selon vos chantiers</h2>
+    </div>
+    <div class="zone-grid">
+      <div>
+        <p>J'interviens directement sur vos sites pour limiter le temps d'arrêt de vos engins. Précisez votre localisation et le type d'engin en panne, je vous confirme rapidement ma disponibilité.</p>
+        <div class="tag-row">
+          <span class="tag">Chantiers BTP</span>
+          <span class="tag">Sites miniers</span>
+          <span class="tag">Carrières</span>
+          <span class="tag">Parc d'engins privé</span>
+        </div>
+      </div>
+      <div>
+        <p>Pour une panne urgente, décrivez le symptôme (bruit, fuite, code défaut, perte de puissance) par WhatsApp avec si possible une photo ou une vidéo — cela accélère le diagnostic avant même mon arrivée.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="contact">
+  <div class="wrap">
+    <div class="contact">
+      <h2>Un engin à l'arrêt ? Écrivons ensemble.</h2>
+      <p>Décrivez la panne, la marque de l'engin et votre localisation — je reviens vers vous rapidement pour organiser l'intervention.</p>
+      <a class="btn btn-primary" href="https://wa.me/2250000000000?text=Bonjour%2C%20j%27ai%20un%20engin%20en%20panne%20(marque%20%2F%20mod%C3%A8le)%2C%20situ%C3%A9%20%C3%A0%20...%20Pouvez-vous%20intervenir%20%3F" target="_blank" rel="noopener">Écrire sur WhatsApp →</a>
+      <div class="contact-note">⚠ Remplacez le numéro dans le lien WhatsApp par votre vrai numéro avant publication.</div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  © <span id="year"></span> Emmanuel Kemtchouang — Mécanicien d'engins lourds · Côte d'Ivoire
+</footer>
+
+<script>
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+  const panel = document.getElementById('gaugePanel');
+  const readout = document.getElementById('readout');
+  const lines = [
+    'LECTURE CAPTEURS...',
+    'PRESSION HYDRAULIQUE OK',
+    'MOTEUR DIESEL — RAS',
+    'CODES DÉFAUT: 0',
+    'SYSTÈME PRÊT ✓'
+  ];
+
+  function typeSequence(i){
+    if(i >= lines.length) return;
+    readout.innerHTML = lines[i] + '<span class="cursor"></span>';
+    setTimeout(()=>typeSequence(i+1), 850);
+  }
+
+  const obs = new IntersectionObserver((entries)=>{
+    entries.forEach(entry=>{
+      if(entry.isIntersecting){
+        panel.classList.add('armed');
+        typeSequence(0);
+        obs.disconnect();
+      }
+    });
+  }, {threshold:0.4});
+  obs.observe(panel);
+</script>
+
+</body>
+</html>
